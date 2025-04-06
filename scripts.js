@@ -3,83 +3,10 @@ const menuToggle = document.querySelector('.menu-toggle');
 const mainMenu = document.querySelector('.main-menu');
 const dropdowns = document.querySelectorAll('.dropdown');
 
-// Mobile Menu Toggle
-menuToggle.addEventListener('click', () => {
-    mainMenu.classList.toggle('active');
-});
-
-// Mobile Dropdown Toggle
-if (window.innerWidth < 992) {
-    dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function(e) {
-            if (e.target.parentElement.classList.contains('dropdown')) {
-                e.preventDefault();
-                this.classList.toggle('active');
-            }
-        });
-    });
-}
-
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('nav') && mainMenu.classList.contains('active')) {
-        mainMenu.classList.remove('active');
-    }
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Add active class to current page in navigation
-function setActiveLink() {
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.main-menu a');
-    
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (currentPath.endsWith(href) || 
-            (currentPath.endsWith('/') && href === 'index.html') ||
-            (currentPath === '/' && href === 'index.html')) {
-            link.classList.add('active');
-            
-            // Si le lien actif est dans un dropdown, activer aussi le parent
-            const parentDropdown = link.closest('.dropdown-content');
-            if (parentDropdown) {
-                const dropdownToggle = parentDropdown.previousElementSibling;
-                if (dropdownToggle) {
-                    dropdownToggle.classList.add('active');
-                }
-            }
-        }
-    });
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    setActiveLink();
-});
-
-// Fonction mobile menu
+// Initialisation unique
 document.addEventListener('DOMContentLoaded', function() {
     // Gestion du menu mobile
     const mobileMenuButton = document.querySelector('.mobile-menu-button');
-    const mainMenu = document.querySelector('.main-menu');
-    const dropdowns = document.querySelectorAll('.dropdown');
-    
     if (mobileMenuButton && mainMenu) {
         mobileMenuButton.addEventListener('click', function() {
             mainMenu.classList.toggle('active');
@@ -97,7 +24,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Gestion des dropdowns sur mobile
+    // Mobile Menu Toggle (ancien code)
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+        });
+    }
+
+    // Close menu when clicking outside (ancien code)
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('nav') && mainMenu && mainMenu.classList.contains('active')) {
+            mainMenu.classList.remove('active');
+        }
+    });
+    
+    // Mobile Dropdown Toggle
     if (window.innerWidth < 992) {
         dropdowns.forEach(dropdown => {
             dropdown.addEventListener('click', function(e) {
@@ -167,36 +108,115 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-});
-
-// Fonction pour gérer les onglets des matchs
-document.addEventListener('DOMContentLoaded', function() {
-    const matchsTabs = document.querySelectorAll('.matchs-tab');
     
-    if (matchsTabs.length > 0) {
-        matchsTabs.forEach(tab => {
+    // Gestion des onglets sur la page d'accueil
+    const matchTabs = document.querySelectorAll('.matchs-tab');
+    const matchContainers = document.querySelectorAll('.matchs-container');
+    
+    if (matchTabs.length > 0 && matchContainers.length > 0) {
+        matchTabs.forEach(tab => {
             tab.addEventListener('click', function() {
-                // Supprimer la classe active de tous les onglets
-                matchsTabs.forEach(t => t.classList.remove('active'));
+                const tabType = this.dataset.tab;
                 
-                // Ajouter la classe active à l'onglet cliqué
+                // Activer l'onglet
+                matchTabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 
-                // Masquer tous les conteneurs de matchs
-                document.getElementById('recent-matches').style.display = 'none';
-                document.getElementById('upcoming-matches').style.display = 'none';
-                
-                // Afficher le conteneur correspondant à l'onglet cliqué
-                const tabId = this.getAttribute('data-tab');
-                if (tabId === 'recent') {
-                    document.getElementById('recent-matches').style.display = 'block';
-                } else if (tabId === 'upcoming') {
-                    document.getElementById('upcoming-matches').style.display = 'block';
-                }
+                // Afficher le conteneur correspondant
+                matchContainers.forEach(container => {
+                    if (container.id === `${tabType}-matches`) {
+                        container.style.display = 'grid';
+                    } else {
+                        container.style.display = 'none';
+                    }
+                });
             });
         });
     }
+    
+    // Gestion des filtres sur la page calendrier
+    const calendarFilterBtns = document.querySelectorAll('.calendar-navigation .filter-btn');
+    const matchCards = document.querySelectorAll('.match-card');
+    const teamSelect = document.getElementById('team-select');
+    
+    if (calendarFilterBtns.length > 0 && matchCards.length > 0) {
+        // Fonction pour filtrer les matchs
+        function filterMatches() {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            const selectedTeam = teamSelect ? teamSelect.value : 'all';
+            
+            matchCards.forEach(card => {
+                const isUpcoming = card.classList.contains('upcoming');
+                const isPlayed = card.classList.contains('played');
+                const teamClass = card.classList.contains('nm3') ? 'nm3' : 
+                                 card.classList.contains('u18') ? 'u18' : 
+                                 card.classList.contains('u15') ? 'u15' : 
+                                 card.classList.contains('u13') ? 'u13' : 'other';
+                
+                // Filtre par statut
+                const matchesStatusFilter = 
+                    (activeFilter === 'all') || 
+                    (activeFilter === 'upcoming' && isUpcoming) || 
+                    (activeFilter === 'played' && isPlayed);
+                
+                // Filtre par équipe
+                const matchesTeamFilter = 
+                    (selectedTeam === 'all') || 
+                    (teamClass === selectedTeam);
+                
+                // Appliquer les deux filtres
+                if (matchesStatusFilter && matchesTeamFilter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Écouteurs d'événements pour les filtres
+        calendarFilterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                calendarFilterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterMatches();
+            });
+        });
+        
+        if (teamSelect) {
+            teamSelect.addEventListener('change', filterMatches);
+        }
+        
+        // Filtrer les matchs au chargement
+        filterMatches();
+    }
+    
+    // Ajout du lien FFBB (une seule fois)
+    addFFBBLink();
 });
+
+// Add active class to current page in navigation
+function setActiveLink() {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.main-menu a');
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (currentPath.endsWith(href) || 
+            (currentPath.endsWith('/') && href === 'index.html') ||
+            (currentPath === '/' && href === 'index.html')) {
+            link.classList.add('active');
+            
+            // Si le lien actif est dans un dropdown, activer aussi le parent
+            const parentDropdown = link.closest('.dropdown-content');
+            if (parentDropdown) {
+                const dropdownToggle = parentDropdown.previousElementSibling;
+                if (dropdownToggle) {
+                    dropdownToggle.classList.add('active');
+                }
+            }
+        }
+    });
+}
 
 // Récupérer les données depuis localStorage (utilisé par l'admin)
 function getAdminData(key) {
@@ -387,133 +407,45 @@ function syncAdminData() {
     }
 }
 
-// Fonction pour récupérer les matchs de NM3 depuis le site de la FFBB
-async function fetchFFBBMatches() {
+// Variable pour suivre si le lien FFBB a été ajouté
+let ffbbLinkAdded = false;
+
+// Fonction pour ajouter le lien FFBB
+function addFFBBLink() {
+    // Si le lien a déjà été ajouté, ne rien faire
+    if (ffbbLinkAdded) return;
+    
     try {
         // URL de l'API ou de la page des matchs NM3 de Toulouges
         const url = 'https://competitions.ffbb.com/ligues/occ/comites/1166/clubs/occ1166560';
         
-        // Message de chargement
-        const matchsContainers = document.querySelectorAll('.matchs-container');
-        if (matchsContainers.length > 0) {
-            matchsContainers.forEach(container => {
-                container.innerHTML = '<div class="loading-message">Chargement des matchs depuis le site de la FFBB...</div>';
-            });
+        // Chercher la section des matchs
+        const matchsSection = document.querySelector('.matchs-section');
+        if (matchsSection && !document.querySelector('.section-header')) {
+            // Pour l'ancien format (avant la mise à jour)
+            const matchsSectionTitle = matchsSection.querySelector('h2');
+            if (matchsSectionTitle) {
+                const sectionHeader = document.createElement('div');
+                sectionHeader.className = 'section-header';
+                sectionHeader.innerHTML = `
+                    <h2 class="section-title">${matchsSectionTitle.textContent}</h2>
+                    <div class="section-links">
+                        <a href="calendar.html" class="btn secondary">Tous les matchs</a>
+                        <a href="${url}" target="_blank" class="btn primary">
+                            <i class="fas fa-calendar-alt"></i> Matchs officiels FFBB
+                        </a>
+                    </div>
+                `;
+                
+                // Remplacer le titre par la nouvelle section header
+                matchsSectionTitle.parentNode.replaceChild(sectionHeader, matchsSectionTitle);
+            }
         }
         
-        // Redirection vers le site de la FFBB pour voir les matchs officiels
-        const matchesViewAll = document.querySelector('.matches-view-all');
-        if (matchesViewAll) {
-            matchesViewAll.innerHTML = '<a href="https://competitions.ffbb.com/ligues/occ/comites/1166/clubs/occ1166560" target="_blank" class="btn primary">Voir tous les matchs officiels <i class="fas fa-external-link-alt"></i></a>';
-        }
-        
-        console.log("Redirection vers le site officiel de la FFBB pour les matchs de NM3");
+        // Marquer comme ajouté
+        ffbbLinkAdded = true;
+        console.log("Lien vers le site officiel de la FFBB ajouté");
     } catch (error) {
-        console.error("Erreur lors de la récupération des matchs FFBB:", error);
-        // Afficher un message d'erreur
-        const matchsContainers = document.querySelectorAll('.matchs-container');
-        if (matchsContainers.length > 0) {
-            matchsContainers.forEach(container => {
-                container.innerHTML = '<div class="error-message">Impossible de récupérer les matchs. Veuillez consulter le <a href="https://competitions.ffbb.com/ligues/occ/comites/1166/clubs/occ1166560" target="_blank">site officiel de la FFBB</a>.</div>';
-            });
-        }
+        console.error("Erreur lors de l'ajout du lien FFBB:", error);
     }
-}
-
-// Initialisation avec vérification de la page
-document.addEventListener('DOMContentLoaded', function() {
-    // Vérifier si nous sommes sur la page d'accueil ou la page calendrier
-    const isMatchPage = document.querySelector('.matchs-section') || document.querySelector('.matchs-list');
-    
-    if (isMatchPage) {
-        // Charger les matchs depuis la FFBB
-        fetchFFBBMatches();
-    }
-    
-    // Le reste du code d'initialisation existant
-    // ... existing initialization ...
-});
-
-// Gestion des onglets de matchs sur la page calendrier
-document.addEventListener('DOMContentLoaded', function() {
-    // Gestion des filtres sur la page calendrier
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const matchCards = document.querySelectorAll('.match-card');
-    const teamSelect = document.getElementById('team-select');
-    
-    if (filterBtns.length > 0 && matchCards.length > 0) {
-        // Fonction pour filtrer les matchs
-        function filterMatches() {
-            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-            const selectedTeam = teamSelect ? teamSelect.value : 'all';
-            
-            matchCards.forEach(card => {
-                const isUpcoming = card.classList.contains('upcoming');
-                const isPlayed = card.classList.contains('played');
-                const teamClass = card.classList.contains('nm3') ? 'nm3' : 
-                                 card.classList.contains('u18') ? 'u18' : 
-                                 card.classList.contains('u15') ? 'u15' : 
-                                 card.classList.contains('u13') ? 'u13' : 'other';
-                
-                // Filtre par statut
-                const matchesStatusFilter = 
-                    (activeFilter === 'all') || 
-                    (activeFilter === 'upcoming' && isUpcoming) || 
-                    (activeFilter === 'played' && isPlayed);
-                
-                // Filtre par équipe
-                const matchesTeamFilter = 
-                    (selectedTeam === 'all') || 
-                    (teamClass === selectedTeam);
-                
-                // Appliquer les deux filtres
-                if (matchesStatusFilter && matchesTeamFilter) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-        
-        // Écouteurs d'événements pour les filtres
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                filterMatches();
-            });
-        });
-        
-        if (teamSelect) {
-            teamSelect.addEventListener('change', filterMatches);
-        }
-        
-        // Filtrer les matchs au chargement
-        filterMatches();
-    }
-    
-    // Gestion des onglets sur la page d'accueil (ancien format)
-    const matchTabs = document.querySelectorAll('.matchs-tab');
-    const matchContainers = document.querySelectorAll('.matchs-container');
-    
-    if (matchTabs.length > 0 && matchContainers.length > 0) {
-        matchTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const tabType = this.dataset.tab;
-                
-                // Activer l'onglet
-                matchTabs.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Afficher le conteneur correspondant
-                matchContainers.forEach(container => {
-                    if (container.id === `${tabType}-matches`) {
-                        container.style.display = 'grid';
-                    } else {
-                        container.style.display = 'none';
-                    }
-                });
-            });
-        });
-    }
-}); 
+} 
