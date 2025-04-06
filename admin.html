@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Toulouges Basket</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="admin.js" defer></script>
+</head>
+<body class="admin-body">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://lh6.googleusercontent.com/BchiGSahuu4wUKKe8McXnL_tAxoYJAwjLXik1V6MHec2v9xFwDvhQ5-9OHn2n49O_SEuNZQW_Oupos25_l2LQ_o=w16383" alt="Toulouges Basket Logo" class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="index.html">Retour au site</a></li>
+                    <li><a href="admin.html" class="active">Administration</a></li>
+                </ul>
+                 
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Administration du site</h1>
+            <p>Gestion des équipes et des médias</p>
+        </div>
+    </section>
+
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="teams">Équipes</button>
+                <button class="tab-btn" data-tab="players">Joueurs</button>
+                <button class="tab-btn" data-tab="media">Médias</button>
+                <button class="tab-btn" data-tab="events">Événements</button>
+                <button class="tab-btn" data-tab="seasons">Saisons</button>
+                <button class="tab-btn" data-tab="pricing">Tarifs</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content active" id="teams-tab">
+                <div class="admin-header">
+                    <h2>Gestion des équipes</h2>
+                    <button class="btn primary" id="add-team-btn"><i class="fas fa-plus"></i> Ajouter une équipe</button>
+                </div>
+
+                <div class="admin-filters">
+                    <select id="season-filter">
+                        <option value="">Toutes les saisons</option>
+                        <option value="2024-25" selected>Saison 2024-25</option>
+                        <option value="2023-24">Saison 2023-24</option>
+                        <option value="2022-23">Saison 2022-23</option>
+                    </select>
+                    <select id="category-filter">
+                        <option value="">Toutes les catégories</option>
+                        <option value="senior">Seniors</option>
+                        <option value="u18">U18</option>
+                        <option value="u15">U15</option>
+                        <option value="u13">U13</option>
+                        <option value="u11">U11</option>
+                        <option value="u9">U9</option>
+                    </select>
+                    <button class="btn-small" id="filter-teams-btn">Filtrer</button>
+                </div>
+
+                <div class="teams-list admin-list">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>NM3 - Seniors Masculin</h3>
+                            <span class="badge">2024-25</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <p><strong>Coach:</strong> Philippe Moreau</p>
+                            <p><strong>Jour d'entrainement:</strong> Mardi, Jeudi</p>
+                            <p><strong>Joueurs:</strong> 12</p>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small view-btn"><i class="fas fa-eye"></i> Voir</button>
+                            <button class="btn-small delete-btn"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>PNF - Seniors Féminin</h3>
+                            <span class="badge">2024-25</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <p><strong>Coach:</strong> Marie Lambert</p>
+                            <p><strong>Jour d'entrainement:</strong> Lundi, Mercredi</p>
+                            <p><strong>Joueuses:</strong> 10</p>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small view-btn"><i class="fas fa-eye"></i> Voir</button>
+                            <button class="btn-small delete-btn"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add/Edit Team Modal -->
+                <div class="admin-modal" id="team-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Ajouter une équipe</h3>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="team-form">
+                                <div class="form-group">
+                                    <label for="team-name">Nom de l'équipe</label>
+                                    <input type="text" id="team-name" placeholder="Ex: NM3 - Seniors Masculin">
+                                </div>
+                                <div class="form-group">
+                                    <label for="team-season">Saison</label>
+                                    <select id="team-season">
+                                        <option value="2024-25">Saison 2024-25</option>
+                                        <option value="2023-24">Saison 2023-24</option>
+                                        <option value="2022-23">Saison 2022-23</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="team-category">Catégorie</label>
+                                    <select id="team-category">
+                                        <option value="senior">Senior</option>
+                                        <option value="u18">U18</option>
+                                        <option value="u15">U15</option>
+                                        <option value="u13">U13</option>
+                                        <option value="u11">U11</option>
+                                        <option value="u9">U9</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="team-gender">Genre</label>
+                                    <select id="team-gender">
+                                        <option value="masculin">Masculin</option>
+                                        <option value="feminin">Féminin</option>
+                                        <option value="mixte">Mixte</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="team-coach">Coach</label>
+                                    <input type="text" id="team-coach" placeholder="Nom du coach">
+                                </div>
+                                <div class="form-group">
+                                    <label for="team-training">Jours d'entrainement</label>
+                                    <input type="text" id="team-training" placeholder="Ex: Mardi, Jeudi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="team-image">Image d'équipe</label>
+                                    <input type="file" id="team-image">
+                                </div>
+                                <div class="form-group">
+                                    <label for="team-description">Description</label>
+                                    <textarea id="team-description" rows="4" placeholder="Description de l'équipe"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn secondary" id="cancel-team">Annuler</button>
+                                    <button type="submit" class="btn primary">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="players-tab">
+                <div class="admin-header">
+                    <h2>Gestion des joueurs</h2>
+                    <button class="btn primary" id="add-player-btn"><i class="fas fa-plus"></i> Ajouter un joueur</button>
+                </div>
+
+                <div class="admin-filters">
+                    <select id="team-filter">
+                        <option value="">Toutes les équipes</option>
+                        <option value="nm3">NM3 - Seniors Masculin</option>
+                        <option value="pnf">PNF - Seniors Féminin</option>
+                    </select>
+                    <button class="btn-small" id="filter-players-btn">Filtrer</button>
+                </div>
+
+                <div class="players-list admin-list">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>Lucas Dupont</h3>
+                            <span class="badge">NM3</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="player-preview">
+                                <img src="https://images.pexels.com/photos/2834917/pexels-photo-2834917.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Lucas Dupont">
+                                <div class="player-info">
+                                    <p><strong>Numéro:</strong> 10</p>
+                                    <p><strong>Poste:</strong> Meneur</p>
+                                    <p><strong>Taille:</strong> 1.85m</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small delete-btn"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>Marie Martin</h3>
+                            <span class="badge">PNF</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <div class="player-preview">
+                                <img src="https://images.pexels.com/photos/1080884/pexels-photo-1080884.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Marie Martin">
+                                <div class="player-info">
+                                    <p><strong>Numéro:</strong> 7</p>
+                                    <p><strong>Poste:</strong> Ailière</p>
+                                    <p><strong>Taille:</strong> 1.78m</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small delete-btn"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add/Edit Player Modal -->
+                <div class="admin-modal" id="player-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Ajouter un joueur</h3>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="player-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="player-name">Nom complet</label>
+                                        <input type="text" id="player-name" placeholder="Prénom Nom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="player-season">Saison</label>
+                                        <select id="player-season">
+                                            <option value="2024-25">Saison 2024-25</option>
+                                            <option value="2023-24">Saison 2023-24</option>
+                                            <option value="2022-23">Saison 2022-23</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="player-team">Équipe</label>
+                                        <select id="player-team">
+                                            <option value="nm3">NM3 - Seniors Masculin</option>
+                                            <option value="pnf">PNF - Seniors Féminin</option>
+                                            <option value="u18m">U18 Masculin</option>
+                                            <option value="u18f">U18 Féminin</option>
+                                            <option value="u15m">U15 Masculin</option>
+                                            <option value="u15f">U15 Féminin</option>
+                                            <option value="u13">U13 Mixte</option>
+                                            <option value="u11">U11 Mixte</option>
+                                            <option value="u9">U9 Mixte</option>
+                                            <option value="u7">Baby Basket (U7)</option>
+                                            <option value="loisir">Loisir</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="player-number">Numéro</label>
+                                        <input type="number" id="player-number" placeholder="Numéro de maillot">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="player-position">Poste</label>
+                                        <select id="player-position">
+                                            <option value="meneur">Meneur</option>
+                                            <option value="arriere">Arrière</option>
+                                            <option value="ailier">Ailier</option>
+                                            <option value="ailier-fort">Ailier fort</option>
+                                            <option value="pivot">Pivot</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="player-height">Taille (m)</label>
+                                        <input type="text" id="player-height" placeholder="Ex: 1.85">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="player-birthdate">Date de naissance</label>
+                                        <input type="date" id="player-birthdate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="player-nationality">Nationalité</label>
+                                        <input type="text" id="player-nationality" placeholder="Ex: Française">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player-photo">Photo</label>
+                                    <input type="file" id="player-photo">
+                                    <div class="dropzone" id="player-dropzone">
+                                        <i class="fas fa-user-plus"></i>
+                                        <p>Glissez et déposez une photo ici<br>ou cliquez pour sélectionner</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player-stats">Statistiques</label>
+                                    <div class="stats-inputs">
+                                        <div class="stat-input">
+                                            <label for="player-ppg">Points/match</label>
+                                            <input type="number" id="player-ppg" step="0.1" placeholder="0.0">
+                                        </div>
+                                        <div class="stat-input">
+                                            <label for="player-rpg">Rebonds/match</label>
+                                            <input type="number" id="player-rpg" step="0.1" placeholder="0.0">
+                                        </div>
+                                        <div class="stat-input">
+                                            <label for="player-apg">Passes/match</label>
+                                            <input type="number" id="player-apg" step="0.1" placeholder="0.0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="player-bio">Biographie</label>
+                                    <textarea id="player-bio" rows="4" placeholder="Parcours, expérience, etc."></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn secondary" id="cancel-player">Annuler</button>
+                                    <button type="submit" class="btn primary">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="media-tab">
+                <div class="admin-header">
+                    <h2>Gestion des médias</h2>
+                    <button class="btn primary" id="upload-media-btn"><i class="fas fa-upload"></i> Ajouter des médias</button>
+                </div>
+
+                <div class="admin-filters">
+                    <select id="media-type-filter">
+                        <option value="">Tous les types</option>
+                        <option value="image">Images</option>
+                        <option value="document">Documents</option>
+                    </select>
+                    <select id="media-category-filter">
+                        <option value="">Toutes les catégories</option>
+                        <option value="equipe">Équipes</option>
+                        <option value="match">Matchs</option>
+                        <option value="evenement">Événements</option>
+                        <option value="club">Club</option>
+                    </select>
+                    <button class="btn-small" id="filter-media-btn">Filtrer</button>
+                </div>
+
+                <div class="media-grid">
+                    <div class="media-item">
+                        <div class="media-preview">
+                            <img src="https://images.pexels.com/photos/3755445/pexels-photo-3755445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Équipe de basket">
+                        </div>
+                        <div class="media-info">
+                            <p class="media-title">equipe-nm3.jpg</p>
+                            <p class="media-meta">Image • Équipe • 1.2 MB</p>
+                        </div>
+                        <div class="media-actions">
+                            <button class="btn-icon copy-btn" title="Copier le lien"><i class="fas fa-link"></i></button>
+                            <button class="btn-icon delete-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="media-item">
+                        <div class="media-preview">
+                            <img src="https://images.pexels.com/photos/8534227/pexels-photo-8534227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Tournoi jeunes">
+                        </div>
+                        <div class="media-info">
+                            <p class="media-title">tournoi-u15.jpg</p>
+                            <p class="media-meta">Image • Événement • 0.8 MB</p>
+                        </div>
+                        <div class="media-actions">
+                            <button class="btn-icon copy-btn" title="Copier le lien"><i class="fas fa-link"></i></button>
+                            <button class="btn-icon delete-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Media Modal -->
+                <div class="admin-modal" id="media-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Ajouter des médias</h3>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="media-form">
+                                <div class="form-group">
+                                    <label for="media-files">Fichiers</label>
+                                    <input type="file" id="media-files" multiple>
+                                    <div class="dropzone" id="media-dropzone">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>Glissez et déposez des fichiers ici<br>ou cliquez pour sélectionner</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="media-category">Catégorie</label>
+                                    <select id="media-category">
+                                        <option value="equipe">Équipes</option>
+                                        <option value="match">Matchs</option>
+                                        <option value="evenement">Événements</option>
+                                        <option value="club">Club</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn secondary" id="cancel-media">Annuler</button>
+                                    <button type="submit" class="btn primary">Importer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="events-tab">
+                <div class="admin-header">
+                    <h2>Gestion des événements</h2>
+                    <button class="btn primary" id="add-event-btn"><i class="fas fa-plus"></i> Ajouter un événement</button>
+                </div>
+
+                <div class="admin-filters">
+                    <select id="event-type-filter">
+                        <option value="">Tous les types</option>
+                        <option value="match">Match</option>
+                        <option value="tournoi">Tournoi</option>
+                        <option value="stage">Stage</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    <input type="date" id="event-date-filter">
+                    <button class="btn-small" id="filter-events-btn">Filtrer</button>
+                </div>
+
+                <div class="events-list admin-list">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>Match NM3 : Toulouges vs Équipe Adversaire</h3>
+                            <span class="badge">Match</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <p><strong>Date:</strong> 10/09/2024</p>
+                            <p><strong>Heure:</strong> 20h00</p>
+                            <p><strong>Lieu:</strong> Halle des Sports, Toulouges</p>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small delete-btn"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>Tournoi U13 / U15</h3>
+                            <span class="badge">Tournoi</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <p><strong>Date:</strong> 24/09/2024</p>
+                            <p><strong>Heure:</strong> 09h00 - 17h00</p>
+                            <p><strong>Lieu:</strong> Complexe Sportif, Toulouges</p>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small delete-btn"><i class="fas fa-trash"></i> Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add/Edit Event Modal -->
+                <div class="admin-modal" id="event-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Ajouter un événement</h3>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="event-form">
+                                <div class="form-group">
+                                    <label for="event-title">Titre</label>
+                                    <input type="text" id="event-title" placeholder="Titre de l'événement">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-type">Type</label>
+                                    <select id="event-type">
+                                        <option value="match">Match</option>
+                                        <option value="tournoi">Tournoi</option>
+                                        <option value="stage">Stage</option>
+                                        <option value="autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-date">Date</label>
+                                    <input type="date" id="event-date">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="event-start-time">Heure de début</label>
+                                        <input type="time" id="event-start-time">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-end-time">Heure de fin</label>
+                                        <input type="time" id="event-end-time">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-location">Lieu</label>
+                                    <input type="text" id="event-location" placeholder="Lieu de l'événement">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-description">Description</label>
+                                    <textarea id="event-description" rows="4" placeholder="Description de l'événement"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-image">Image</label>
+                                    <input type="file" id="event-image">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn secondary" id="cancel-event">Annuler</button>
+                                    <button type="submit" class="btn primary">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="seasons-tab">
+                <div class="admin-header">
+                    <h2>Gestion des saisons</h2>
+                    <button class="btn primary" id="add-season-btn"><i class="fas fa-plus"></i> Ajouter une saison</button>
+                </div>
+
+                <div class="seasons-list admin-list">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>Saison 2024-2025</h3>
+                            <span class="badge success">Active</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <p><strong>Date de début:</strong> 01/09/2024</p>
+                            <p><strong>Date de fin:</strong> 30/06/2025</p>
+                            <p><strong>Équipes:</strong> 12</p>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small view-btn"><i class="fas fa-eye"></i> Voir</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>Saison 2023-2024</h3>
+                            <span class="badge">Archivée</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <p><strong>Date de début:</strong> 01/09/2023</p>
+                            <p><strong>Date de fin:</strong> 30/06/2024</p>
+                            <p><strong>Équipes:</strong> 10</p>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small view-btn"><i class="fas fa-eye"></i> Voir</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3>Saison 2022-2023</h3>
+                            <span class="badge">Archivée</span>
+                        </div>
+                        <div class="admin-card-body">
+                            <p><strong>Date de début:</strong> 01/09/2022</p>
+                            <p><strong>Date de fin:</strong> 30/06/2023</p>
+                            <p><strong>Équipes:</strong> 9</p>
+                        </div>
+                        <div class="admin-card-actions">
+                            <button class="btn-small edit-btn"><i class="fas fa-edit"></i> Modifier</button>
+                            <button class="btn-small view-btn"><i class="fas fa-eye"></i> Voir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add/Edit Season Modal -->
+                <div class="admin-modal" id="season-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Ajouter une saison</h3>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="season-form">
+                                <div class="form-group">
+                                    <label for="season-name">Nom de la saison</label>
+                                    <input type="text" id="season-name" placeholder="Ex: 2025-2026">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="season-start">Date de début</label>
+                                        <input type="date" id="season-start">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="season-end">Date de fin</label>
+                                        <input type="date" id="season-end">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="season-status">Statut</label>
+                                    <select id="season-status">
+                                        <option value="active">Active</option>
+                                        <option value="archived">Archivée</option>
+                                        <option value="upcoming">À venir</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="season-description">Description</label>
+                                    <textarea id="season-description" rows="4" placeholder="Description de la saison"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="season-image">Image de couverture</label>
+                                    <input type="file" id="season-image">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn secondary" id="cancel-season">Annuler</button>
+                                    <button type="submit" class="btn primary">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="pricing-tab">
+                <div class="admin-header">
+                    <h2>Gestion des tarifs</h2>
+                    <button class="btn primary" id="add-pricing-btn"><i class="fas fa-plus"></i> Ajouter un tarif</button>
+                </div>
+
+                <div class="admin-filters">
+                    <select id="pricing-season-filter">
+                        <option value="">Toutes les saisons</option>
+                        <option value="2024-25" selected>Saison 2024-25</option>
+                        <option value="2023-24">Saison 2023-24</option>
+                        <option value="2022-23">Saison 2022-23</option>
+                    </select>
+                    <button class="btn-small" id="filter-pricing-btn">Filtrer</button>
+                </div>
+
+                <div class="pricing-table-container">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Catégorie</th>
+                                <th>Âge</th>
+                                <th>Tarif</th>
+                                <th>Réduction</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Baby Basket (U7)</td>
+                                <td>5-6 ans</td>
+                                <td>150 €</td>
+                                <td>-20 € pour les fratries</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mini-Basket (U9)</td>
+                                <td>7-8 ans</td>
+                                <td>160 €</td>
+                                <td>-20 € pour les fratries</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Poussins/Poussines (U11)</td>
+                                <td>9-10 ans</td>
+                                <td>170 €</td>
+                                <td>-20 € pour les fratries</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Benjamins/Benjamines (U13)</td>
+                                <td>11-12 ans</td>
+                                <td>180 €</td>
+                                <td>-20 € pour les fratries</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Minimes (U15)</td>
+                                <td>13-14 ans</td>
+                                <td>190 €</td>
+                                <td>-20 € pour les fratries</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Cadets/Cadettes (U18)</td>
+                                <td>15-17 ans</td>
+                                <td>200 €</td>
+                                <td>-20 € pour les fratries</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Seniors</td>
+                                <td>18 ans et +</td>
+                                <td>220 €</td>
+                                <td>-20 € pour les fratries</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Loisir</td>
+                                <td>18 ans et +</td>
+                                <td>150 €</td>
+                                <td>—</td>
+                                <td>
+                                    <button class="btn-icon edit-pricing-btn" title="Modifier"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete-pricing-btn" title="Supprimer"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Add/Edit Pricing Modal -->
+                <div class="admin-modal" id="pricing-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Ajouter un tarif</h3>
+                            <button class="close-modal"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="pricing-form">
+                                <div class="form-group">
+                                    <label for="pricing-category">Catégorie</label>
+                                    <input type="text" id="pricing-category" placeholder="Ex: Baby Basket (U7)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pricing-age">Âge</label>
+                                    <input type="text" id="pricing-age" placeholder="Ex: 5-6 ans">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="pricing-amount">Tarif (€)</label>
+                                        <input type="number" id="pricing-amount" placeholder="Ex: 150">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pricing-season">Saison</label>
+                                        <select id="pricing-season">
+                                            <option value="2024-25">Saison 2024-25</option>
+                                            <option value="2023-24">Saison 2023-24</option>
+                                            <option value="2022-23">Saison 2022-23</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pricing-discount">Réduction</label>
+                                    <input type="text" id="pricing-discount" placeholder="Ex: -20 € pour les fratries">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pricing-description">Informations supplémentaires</label>
+                                    <textarea id="pricing-description" rows="4" placeholder="Informations supplémentaires sur ce tarif"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" class="btn secondary" id="cancel-pricing">Annuler</button>
+                                    <button type="submit" class="btn primary">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TOULOUGES BASKET</h3>
+                    <p>Club formateur des Pyrénées Orientales</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <p><i class="fas fa-envelope"></i> admin@toulougesbasket.net</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Toulouges Basket - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

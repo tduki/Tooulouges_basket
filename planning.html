@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning Entrainements - Toulouges Basket</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://lh6.googleusercontent.com/BchiGSahuu4wUKKe8McXnL_tAxoYJAwjLXik1V6MHec2v9xFwDvhQ5-9OHn2n49O_SEuNZQW_Oupos25_l2LQ_o=w16383" alt="Toulouges Basket Logo" class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul class="main-menu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="organigramme.html">Organigramme</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="active">Saison 2024/25</a>
+                        <div class="dropdown-content">
+                            <a href="nm3.html">NM3</a>
+                            <a href="planning.html" class="active">Planning Entrainements</a>
+                            <a href="tarifs.html">Tarifs Cotisations</a>
+                            <a href="championnats.html">Les Championnats</a>
+                            <a href="vie-club.html">Participation Vie du Club</a>
+                        </div>
+                    </li>
+                    <li><a href="club-formateur.html">Club Formateur</a></li>
+                    <li><a href="boutique.html">Boutique</a></li>
+                    <li><a href="calendar.html">Calendrier</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Nos Équipes</a>
+                        <div class="dropdown-content">
+                            <a href="equipes-2024-25.html">Saison 2024/25</a>
+                            <a href="equipes-2023-24.html">Saison 2023/24</a>
+                            <a href="equipes-2022-23.html">Saison 2022/23</a>
+                            <a href="equipes-2021-22.html">Saison 2021/22</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Partenaires</a>
+                        <div class="dropdown-content">
+                            <a href="partenaires.html">Nos Partenaires</a>
+                            <a href="devenir-partenaire.html">Devenir Partenaire</a>
+                        </div>
+                    </li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                </ul>
+               
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Planning Entrainements</h1>
+            <p>Saison 2024/25</p>
+        </div>
+    </section>
+
+    <section class="planning-section">
+        <div class="container">
+            <div class="planning-intro content-box">
+                <h2>Horaires des entrainements</h2>
+                <p>Retrouvez ci-dessous les horaires d'entrainements de toutes nos équipes pour la saison 2024/25. Tous les entrainements se déroulent à la Halle des Sports de Toulouges, sauf indication contraire.</p>
+                
+                <div class="planning-notes">
+                    <h3>Notes importantes :</h3>
+                    <ul>
+                        <li>Les horaires peuvent être modifiés en cours de saison. Consultez régulièrement cette page.</li>
+                        <li>En cas d'annulation exceptionnelle d'un entraînement, les joueurs et parents seront prévenus par les coachs.</li>
+                        <li>Toutes les séances sont encadrées par des entraîneurs qualifiés.</li>
+                        <li>Prévoir une tenue de sport adaptée, des chaussures propres réservées à la salle, et une bouteille d'eau.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="planning-filters">
+                <button class="filter-btn active" data-filter="all">Tous les jours</button>
+                <button class="filter-btn" data-filter="lundi">Lundi</button>
+                <button class="filter-btn" data-filter="mardi">Mardi</button>
+                <button class="filter-btn" data-filter="mercredi">Mercredi</button>
+                <button class="filter-btn" data-filter="jeudi">Jeudi</button>
+                <button class="filter-btn" data-filter="vendredi">Vendredi</button>
+                <button class="filter-btn" data-filter="samedi">Samedi</button>
+            </div>
+            
+            <div class="planning-calendar">
+                <!-- LUNDI -->
+                <div class="planning-day" data-day="lundi">
+                    <div class="day-header">
+                        <h3>Lundi</h3>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">17h30 - 19h00</div>
+                            <div class="schedule-content">
+                                <h4>U15 Féminines</h4>
+                                <p>Coach: Sophie Petit</p>
+                            </div>
+                            <div class="schedule-category category-u15">U15F</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">19h00 - 20h30</div>
+                            <div class="schedule-content">
+                                <h4>U18 Masculins</h4>
+                                <p>Coach: Thomas Blanc</p>
+                            </div>
+                            <div class="schedule-category category-u18">U18M</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">20h30 - 22h30</div>
+                            <div class="schedule-content">
+                                <h4>Seniors Masculins 1 (NM3)</h4>
+                                <p>Coach: Jean Dupont</p>
+                            </div>
+                            <div class="schedule-category category-nm3">NM3</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MARDI -->
+                <div class="planning-day" data-day="mardi">
+                    <div class="day-header">
+                        <h3>Mardi</h3>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">17h30 - 19h00</div>
+                            <div class="schedule-content">
+                                <h4>U13 Mixte</h4>
+                                <p>Coach: Luc Dubois</p>
+                            </div>
+                            <div class="schedule-category category-u13">U13</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">19h00 - 20h30</div>
+                            <div class="schedule-content">
+                                <h4>Seniors Féminines 1 (PNF)</h4>
+                                <p>Coach: Marie Martin</p>
+                            </div>
+                            <div class="schedule-category category-pnf">PNF</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">20h30 - 22h30</div>
+                            <div class="schedule-content">
+                                <h4>Basket Loisir</h4>
+                                <p>Responsable: Éric Moreau</p>
+                            </div>
+                            <div class="schedule-category category-loisir">LOISIR</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MERCREDI -->
+                <div class="planning-day" data-day="mercredi">
+                    <div class="day-header">
+                        <h3>Mercredi</h3>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">14h00 - 15h30</div>
+                            <div class="schedule-content">
+                                <h4>U9</h4>
+                                <p>Coach: Claire Michel</p>
+                            </div>
+                            <div class="schedule-category category-u9">U9</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">15h30 - 17h00</div>
+                            <div class="schedule-content">
+                                <h4>U11</h4>
+                                <p>Coach: Paul Roux</p>
+                            </div>
+                            <div class="schedule-category category-u11">U11</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">17h00 - 18h30</div>
+                            <div class="schedule-content">
+                                <h4>U13 Mixte</h4>
+                                <p>Coach: Luc Dubois</p>
+                            </div>
+                            <div class="schedule-category category-u13">U13</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">18h30 - 20h00</div>
+                            <div class="schedule-content">
+                                <h4>U15 Féminines</h4>
+                                <p>Coach: Sophie Petit</p>
+                            </div>
+                            <div class="schedule-category category-u15">U15F</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">20h00 - 22h00</div>
+                            <div class="schedule-content">
+                                <h4>Seniors Féminines 1 (PNF)</h4>
+                                <p>Coach: Marie Martin</p>
+                            </div>
+                            <div class="schedule-category category-pnf">PNF</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- JEUDI -->
+                <div class="planning-day" data-day="jeudi">
+                    <div class="day-header">
+                        <h3>Jeudi</h3>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">17h30 - 19h00</div>
+                            <div class="schedule-content">
+                                <h4>U18 Masculins</h4>
+                                <p>Coach: Thomas Blanc</p>
+                            </div>
+                            <div class="schedule-category category-u18">U18M</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">19h00 - 21h00</div>
+                            <div class="schedule-content">
+                                <h4>Seniors Masculins 1 (NM3)</h4>
+                                <p>Coach: Jean Dupont</p>
+                            </div>
+                            <div class="schedule-category category-nm3">NM3</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VENDREDI -->
+                <div class="planning-day" data-day="vendredi">
+                    <div class="day-header">
+                        <h3>Vendredi</h3>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">17h30 - 19h00</div>
+                            <div class="schedule-content">
+                                <h4>U11</h4>
+                                <p>Coach: Paul Roux</p>
+                            </div>
+                            <div class="schedule-category category-u11">U11</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">19h00 - 20h30</div>
+                            <div class="schedule-content">
+                                <h4>U18 Masculins</h4>
+                                <p>Coach: Thomas Blanc</p>
+                            </div>
+                            <div class="schedule-category category-u18">U18M</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SAMEDI -->
+                <div class="planning-day" data-day="samedi">
+                    <div class="day-header">
+                        <h3>Samedi</h3>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">9h30 - 11h00</div>
+                            <div class="schedule-content">
+                                <h4>Baby Basket (U7)</h4>
+                                <p>Coach: Claire Michel</p>
+                            </div>
+                            <div class="schedule-category category-u7">U7</div>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <div class="schedule-time">11h00 - 12h30</div>
+                            <div class="schedule-content">
+                                <h4>U9</h4>
+                                <p>Coach: Claire Michel</p>
+                            </div>
+                            <div class="schedule-category category-u9">U9</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="download-planning">
+                <a href="documents/planning-entrainements.pdf" class="btn primary" download><i class="fas fa-download"></i> Télécharger le planning (PDF)</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://lh6.googleusercontent.com/BchiGSahuu4wUKKe8McXnL_tAxoYJAwjLXik1V6MHec2v9xFwDvhQ5-9OHn2n49O_SEuNZQW_Oupos25_l2LQ_o=w16383" alt="Toulouges Basket Logo" class="logo-img">
+            </div>
+            <div class="footer-info">
+                <div class="club-info">
+                    <h3>Toulouges Basket Association</h3>
+                    <p>Halle Des Sports, Avenue du Stade</p>
+                    <p>66350 Toulouges</p>
+                    <p>Tel: 04 68 55 02 52</p>
+                    <p>Email: toulouges.basket@gmail.com</p>
+                </div>
+                <div class="footer-nav">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="club-formateur.html">Club formateur</a></li>
+                        <li><a href="equipes-2024-25.html">Équipes</a></li>
+                        <li><a href="calendar.html">Calendrier</a></li>
+                        <li><a href="partenaires.html">Partenaires</a></li>
+                        <li><a href="contacts.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/ToulougesBasketAssociation/" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/toulougesbasketassociation/?hl=fr" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Toulouges Basket Association. Tous droits réservés.</p>
+            <a href="admin-login.html" class="admin-link"><i class="fas fa-lock"></i> Espace administration</a>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Filtrage du planning par jour
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.planning-filters .filter-btn');
+            const planningDays = document.querySelectorAll('.planning-day');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Supprimer la classe active de tous les boutons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    btn.classList.add('active');
+                    
+                    const filter = btn.getAttribute('data-filter');
+                    
+                    // Afficher ou masquer les jours en fonction du filtre
+                    planningDays.forEach(day => {
+                        if (filter === 'all' || day.getAttribute('data-day') === filter) {
+                            day.style.display = 'block';
+                        } else {
+                            day.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
