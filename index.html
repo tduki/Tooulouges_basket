@@ -114,192 +114,198 @@
 
     <section class="matchs-section">
         <div class="container">
-            <h2>Calendrier des matchs</h2>
-            <div class="matchs-tabs">
-                <button class="matchs-tab active" data-tab="recent">Matchs récents</button>
-                <button class="matchs-tab" data-tab="upcoming">Matchs à venir</button>
-            </div>
-            
-            <div class="matchs-container" id="recent-matches">
-                <!-- Match 1 - Passé avec victoire -->
-                <div class="match-card">
-                    <div class="match-header">
-                        <div class="match-journee">Journée 15</div>
-                        <div class="match-date">5 Février 2025 - 20h00</div>
-                    </div>
-                    <div class="match-content">
-                        <div class="match-team">
-                            <div class="match-team-abbr">TBA</div>
-                            <div class="match-team-name">Toulouges Basket</div>
-                        </div>
-                        <div class="match-score">
-                            <span>78</span>
-                            <span class="match-score-separator">-</span>
-                            <span>65</span>
-                        </div>
-                        <div class="match-team">
-                            <div class="match-team-abbr">MBA</div>
-                            <div class="match-team-name">Marseille Basket</div>
-                        </div>
-                    </div>
-                    <div class="match-footer">
-                        <div class="match-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Halle des Sports, Toulouges
-                        </div>
-                        <div class="match-badge won">Victoire</div>
-                    </div>
-                </div>
-                
-                <!-- Match 2 - Passé avec défaite à l'extérieur -->
-                <div class="match-card">
-                    <div class="match-header">
-                        <div class="match-journee">Journée 14</div>
-                        <div class="match-date">29 Janvier 2025 - 20h00</div>
-                    </div>
-                    <div class="match-content">
-                        <div class="match-team">
-                            <div class="match-team-abbr">BCN</div>
-                            <div class="match-team-name">BC Nîmes</div>
-                        </div>
-                        <div class="match-score">
-                            <span>72</span>
-                            <span class="match-score-separator">-</span>
-                            <span>68</span>
-                        </div>
-                        <div class="match-team">
-                            <div class="match-team-abbr">TBA</div>
-                            <div class="match-team-name">Toulouges Basket</div>
-                        </div>
-                    </div>
-                    <div class="match-footer">
-                        <div class="match-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Palais des Sports, Nîmes
-                        </div>
-                        <div class="match-badge lost">Défaite</div>
-                    </div>
-                </div>
-                
-                <!-- Match 3 - Passé avec victoire -->
-                <div class="match-card">
-                    <div class="match-header">
-                        <div class="match-journee">Journée 13</div>
-                        <div class="match-date">22 Janvier 2025 - 20h00</div>
-                    </div>
-                    <div class="match-content">
-                        <div class="match-team">
-                            <div class="match-team-abbr">TBA</div>
-                            <div class="match-team-name">Toulouges Basket</div>
-                        </div>
-                        <div class="match-score">
-                            <span>85</span>
-                            <span class="match-score-separator">-</span>
-                            <span>76</span>
-                        </div>
-                        <div class="match-team">
-                            <div class="match-team-abbr">BCM</div>
-                            <div class="match-team-name">BC Montpellier</div>
-                        </div>
-                    </div>
-                    <div class="match-footer">
-                        <div class="match-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Halle des Sports, Toulouges
-                        </div>
-                        <div class="match-badge won">Victoire</div>
-                    </div>
+            <div class="section-header">
+                <h2 class="section-title">Les Matchs</h2>
+                <div class="section-links">
+                    <a href="calendar.html" class="btn secondary">Tous les matchs</a>
+                    <a href="https://competitions.ffbb.com/ligues/occ/comites/1166/clubs/occ1166560" target="_blank" class="btn primary">
+                        <i class="fas fa-calendar-alt"></i> Matchs officiels FFBB
+                    </a>
                 </div>
             </div>
-            
-            <div class="matchs-container" id="upcoming-matches" style="display: none;">
-                <!-- Match 1 - À venir -->
-                <div class="match-card">
-                    <div class="match-header">
-                        <div class="match-journee">Journée 16</div>
-                        <div class="match-date">12 Février 2025 - 20h00</div>
-                    </div>
-                    <div class="match-content">
-                        <div class="match-team">
-                            <div class="match-team-abbr">SPB</div>
-                            <div class="match-team-name">Sète Basket</div>
+            <div class="matchs-grid">
+                <div class="matchs-column">
+                    <h3>Matchs Récents</h3>
+                    <div class="matchs-container recent-matchs">
+                        <!-- Match 1 - Passé avec victoire -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <div class="match-journee">Journée 21</div>
+                                <div class="match-date">8 Avril 2024 - 20h00</div>
+                            </div>
+                            <div class="match-content">
+                                <div class="match-team">
+                                    <div class="match-team-abbr">BCM</div>
+                                    <div class="match-team-name">BC Montpellier</div>
+                                </div>
+                                <div class="match-score">
+                                    <span>67</span>
+                                    <span class="match-score-separator">-</span>
+                                    <span>74</span>
+                                </div>
+                                <div class="match-team">
+                                    <div class="match-team-abbr">TBA</div>
+                                    <div class="match-team-name">Toulouges Basket</div>
+                                </div>
+                            </div>
+                            <div class="match-footer">
+                                <div class="match-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Palais des Sports, Montpellier
+                                </div>
+                                <div class="match-badge won">Victoire</div>
+                            </div>
                         </div>
-                        <div class="match-score upcoming">
-                            VS
+                        
+                        <!-- Match 2 - Passé avec défaite à domicile -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <div class="match-journee">Journée 20</div>
+                                <div class="match-date">1 Avril 2024 - 20h00</div>
+                            </div>
+                            <div class="match-content">
+                                <div class="match-team">
+                                    <div class="match-team-abbr">TBA</div>
+                                    <div class="match-team-name">Toulouges Basket</div>
+                                </div>
+                                <div class="match-score">
+                                    <span>68</span>
+                                    <span class="match-score-separator">-</span>
+                                    <span>72</span>
+                                </div>
+                                <div class="match-team">
+                                    <div class="match-team-abbr">GSA</div>
+                                    <div class="match-team-name">Golfe Saint-Tropez</div>
+                                </div>
+                            </div>
+                            <div class="match-footer">
+                                <div class="match-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Halle des Sports, Toulouges
+                                </div>
+                                <div class="match-badge lost">Défaite</div>
+                            </div>
                         </div>
-                        <div class="match-team">
-                            <div class="match-team-abbr">TBA</div>
-                            <div class="match-team-name">Toulouges Basket</div>
+                        
+                        <!-- Match 3 - Passé avec victoire -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <div class="match-journee">Journée 19</div>
+                                <div class="match-date">25 Mars 2024 - 20h00</div>
+                            </div>
+                            <div class="match-content">
+                                <div class="match-team">
+                                    <div class="match-team-abbr">TBA</div>
+                                    <div class="match-team-name">Toulouges Basket</div>
+                                </div>
+                                <div class="match-score">
+                                    <span>85</span>
+                                    <span class="match-score-separator">-</span>
+                                    <span>78</span>
+                                </div>
+                                <div class="match-team">
+                                    <div class="match-team-abbr">NDB</div>
+                                    <div class="match-team-name">Nîmes Basket</div>
+                                </div>
+                            </div>
+                            <div class="match-footer">
+                                <div class="match-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Halle des Sports, Toulouges
+                                </div>
+                                <div class="match-badge won">Victoire</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="match-footer">
-                        <div class="match-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Gymnase Victor Hugo, Sète
-                        </div>
-                        <div class="match-badge depl">Déplacement</div>
                     </div>
                 </div>
-                
-                <!-- Match 2 - À venir -->
-                <div class="match-card">
-                    <div class="match-header">
-                        <div class="match-journee">Journée 17</div>
-                        <div class="match-date">19 Février 2025 - 20h00</div>
-                    </div>
-                    <div class="match-content">
-                        <div class="match-team">
-                            <div class="match-team-abbr">TBA</div>
-                            <div class="match-team-name">Toulouges Basket</div>
+                <div class="matchs-column">
+                    <h3>Matchs à Venir</h3>
+                    <div class="matchs-container upcoming-matchs">
+                        <!-- Match 1 - À venir -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <div class="match-journee">Journée 22</div>
+                                <div class="match-date">15 Avril 2024 - 20h00</div>
+                            </div>
+                            <div class="match-content">
+                                <div class="match-team">
+                                    <div class="match-team-abbr">TBA</div>
+                                    <div class="match-team-name">Toulouges Basket</div>
+                                </div>
+                                <div class="match-score upcoming">
+                                    VS
+                                </div>
+                                <div class="match-team">
+                                    <div class="match-team-abbr">PBR</div>
+                                    <div class="match-team-name">Pays de Retz Basket</div>
+                                </div>
+                            </div>
+                            <div class="match-footer">
+                                <div class="match-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Halle des Sports, Toulouges
+                                </div>
+                                <div class="match-badge">Entrée libre</div>
+                            </div>
                         </div>
-                        <div class="match-score upcoming">
-                            VS
+                        
+                        <!-- Match 2 - À venir -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <div class="match-journee">Journée 23</div>
+                                <div class="match-date">22 Avril 2024 - 20h00</div>
+                            </div>
+                            <div class="match-content">
+                                <div class="match-team">
+                                    <div class="match-team-abbr">COA</div>
+                                    <div class="match-team-name">CO Avignon</div>
+                                </div>
+                                <div class="match-score upcoming">
+                                    VS
+                                </div>
+                                <div class="match-team">
+                                    <div class="match-team-abbr">TBA</div>
+                                    <div class="match-team-name">Toulouges Basket</div>
+                                </div>
+                            </div>
+                            <div class="match-footer">
+                                <div class="match-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Palais des Sports, Avignon
+                                </div>
+                                <div class="match-badge depl">Déplacement</div>
+                            </div>
                         </div>
-                        <div class="match-team">
-                            <div class="match-team-abbr">ALM</div>
-                            <div class="match-team-name">Avignon Le Pontet</div>
+                        
+                        <!-- Match 3 - À venir -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <div class="match-journee">Journée 24</div>
+                                <div class="match-date">29 Avril 2024 - 20h00</div>
+                            </div>
+                            <div class="match-content">
+                                <div class="match-team">
+                                    <div class="match-team-abbr">TBA</div>
+                                    <div class="match-team-name">Toulouges Basket</div>
+                                </div>
+                                <div class="match-score upcoming">
+                                    VS
+                                </div>
+                                <div class="match-team">
+                                    <div class="match-team-abbr">ASA</div>
+                                    <div class="match-team-name">AS Aix-Maurienne</div>
+                                </div>
+                            </div>
+                            <div class="match-footer">
+                                <div class="match-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Halle des Sports, Toulouges
+                                </div>
+                                <div class="match-badge">Entrée libre</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="match-footer">
-                        <div class="match-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Halle des Sports, Toulouges
-                        </div>
-                        <div class="match-badge">Entrée libre</div>
                     </div>
                 </div>
-                
-                <!-- Match 3 - À venir -->
-                <div class="match-card">
-                    <div class="match-header">
-                        <div class="match-journee">Journée 18</div>
-                        <div class="match-date">26 Février 2025 - 20h00</div>
-                    </div>
-                    <div class="match-content">
-                        <div class="match-team">
-                            <div class="match-team-abbr">ECM</div>
-                            <div class="match-team-name">Étoile Carquefou</div>
-                        </div>
-                        <div class="match-score upcoming">
-                            VS
-                        </div>
-                        <div class="match-team">
-                            <div class="match-team-abbr">TBA</div>
-                            <div class="match-team-name">Toulouges Basket</div>
-                        </div>
-                    </div>
-                    <div class="match-footer">
-                        <div class="match-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Gymnase du Souchais, Carquefou
-                        </div>
-                        <div class="match-badge depl">Déplacement</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="matches-view-all">
-                <a href="calendar.html">Voir tous les matchs <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
     </section>

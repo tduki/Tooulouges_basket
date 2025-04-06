@@ -385,4 +385,135 @@ function syncAdminData() {
         displayEvents();
         displayPricing();
     }
-} 
+}
+
+// Fonction pour récupérer les matchs de NM3 depuis le site de la FFBB
+async function fetchFFBBMatches() {
+    try {
+        // URL de l'API ou de la page des matchs NM3 de Toulouges
+        const url = 'https://competitions.ffbb.com/ligues/occ/comites/1166/clubs/occ1166560';
+        
+        // Message de chargement
+        const matchsContainers = document.querySelectorAll('.matchs-container');
+        if (matchsContainers.length > 0) {
+            matchsContainers.forEach(container => {
+                container.innerHTML = '<div class="loading-message">Chargement des matchs depuis le site de la FFBB...</div>';
+            });
+        }
+        
+        // Redirection vers le site de la FFBB pour voir les matchs officiels
+        const matchesViewAll = document.querySelector('.matches-view-all');
+        if (matchesViewAll) {
+            matchesViewAll.innerHTML = '<a href="https://competitions.ffbb.com/ligues/occ/comites/1166/clubs/occ1166560" target="_blank" class="btn primary">Voir tous les matchs officiels <i class="fas fa-external-link-alt"></i></a>';
+        }
+        
+        console.log("Redirection vers le site officiel de la FFBB pour les matchs de NM3");
+    } catch (error) {
+        console.error("Erreur lors de la récupération des matchs FFBB:", error);
+        // Afficher un message d'erreur
+        const matchsContainers = document.querySelectorAll('.matchs-container');
+        if (matchsContainers.length > 0) {
+            matchsContainers.forEach(container => {
+                container.innerHTML = '<div class="error-message">Impossible de récupérer les matchs. Veuillez consulter le <a href="https://competitions.ffbb.com/ligues/occ/comites/1166/clubs/occ1166560" target="_blank">site officiel de la FFBB</a>.</div>';
+            });
+        }
+    }
+}
+
+// Initialisation avec vérification de la page
+document.addEventListener('DOMContentLoaded', function() {
+    // Vérifier si nous sommes sur la page d'accueil ou la page calendrier
+    const isMatchPage = document.querySelector('.matchs-section') || document.querySelector('.matchs-list');
+    
+    if (isMatchPage) {
+        // Charger les matchs depuis la FFBB
+        fetchFFBBMatches();
+    }
+    
+    // Le reste du code d'initialisation existant
+    // ... existing initialization ...
+});
+
+// Gestion des onglets de matchs sur la page calendrier
+document.addEventListener('DOMContentLoaded', function() {
+    // Gestion des filtres sur la page calendrier
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const matchCards = document.querySelectorAll('.match-card');
+    const teamSelect = document.getElementById('team-select');
+    
+    if (filterBtns.length > 0 && matchCards.length > 0) {
+        // Fonction pour filtrer les matchs
+        function filterMatches() {
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            const selectedTeam = teamSelect ? teamSelect.value : 'all';
+            
+            matchCards.forEach(card => {
+                const isUpcoming = card.classList.contains('upcoming');
+                const isPlayed = card.classList.contains('played');
+                const teamClass = card.classList.contains('nm3') ? 'nm3' : 
+                                 card.classList.contains('u18') ? 'u18' : 
+                                 card.classList.contains('u15') ? 'u15' : 
+                                 card.classList.contains('u13') ? 'u13' : 'other';
+                
+                // Filtre par statut
+                const matchesStatusFilter = 
+                    (activeFilter === 'all') || 
+                    (activeFilter === 'upcoming' && isUpcoming) || 
+                    (activeFilter === 'played' && isPlayed);
+                
+                // Filtre par équipe
+                const matchesTeamFilter = 
+                    (selectedTeam === 'all') || 
+                    (teamClass === selectedTeam);
+                
+                // Appliquer les deux filtres
+                if (matchesStatusFilter && matchesTeamFilter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Écouteurs d'événements pour les filtres
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterMatches();
+            });
+        });
+        
+        if (teamSelect) {
+            teamSelect.addEventListener('change', filterMatches);
+        }
+        
+        // Filtrer les matchs au chargement
+        filterMatches();
+    }
+    
+    // Gestion des onglets sur la page d'accueil (ancien format)
+    const matchTabs = document.querySelectorAll('.matchs-tab');
+    const matchContainers = document.querySelectorAll('.matchs-container');
+    
+    if (matchTabs.length > 0 && matchContainers.length > 0) {
+        matchTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabType = this.dataset.tab;
+                
+                // Activer l'onglet
+                matchTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Afficher le conteneur correspondant
+                matchContainers.forEach(container => {
+                    if (container.id === `${tabType}-matches`) {
+                        container.style.display = 'grid';
+                    } else {
+                        container.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+}); 
